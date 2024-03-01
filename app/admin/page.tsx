@@ -4,10 +4,9 @@ import { fetchNewsB, deleteNews} from "../lib/action";
 import Link from "next/link";
 import { signOut } from "@/auth";
 import { redirect } from "next/navigation";
+import EditCurNews from "@/app/ui/editCurNews";
 
 import { Metadata } from "next";
-
-
 export const metadata: Metadata = {
   title: "Admin",
 };
@@ -41,7 +40,47 @@ export default async function Admin() {
       <h1 className={styles.h1}>Admin page</h1>
 
       <h2>News</h2>
-     
+      {news.map((nw, n) => {
+        const deleteNewsId = deleteNews.bind(null, nw.id);
+        // const editNewsIdB = editNewsId.bind(null, nw.id);
+
+        return (
+          <div className={"article " + styles.admArt} key={`news ${nw.id}`}>
+            <p>{`id: ${nw.id}`}</p>
+            <p>{`date: ${nw.date}`}</p>
+            <p>{`title: ${nw.title}`}</p>
+            <p>{`img: ${nw.img}`}</p>
+            <p>{`text: ${nw.text}`}</p>
+            <div className={styles.btnCont}>
+              <form className={styles.artBtn} action={deleteNewsId}>
+                <button className="btn" type="submit">
+                  Del
+                </button>
+              </form>
+              <form
+                className={styles.artBtn}
+                // action={editNewsIdB}>
+                action={async () => {
+                  "use server";
+                  redirect(`/admin/${nw.id}/editNews`);
+                }}
+              >
+                <button className="btn" type="submit">
+                  Edit
+                </button>
+              </form>
+            </div>
+            <EditCurNews curNews={nw} />
+            {/* <EditForm curNews={nw}/> */}
+            {/* <Link
+                href={`/admin/${nw.id}/editNews`}
+                className="rounded-md border p-2 hover:bg-gray-100"
+              >
+               Edit
+              </Link> */}
+          </div>
+        );
+      })}
     </div>
   );
 }

@@ -6,6 +6,22 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+
+  --header-4: #8e58af;
+  --header-5: #540d83;
+
+  --green-100: #c8e2e2;
+  --green-500: #5fc7c5;
+  --green-600: #309a99;
+  --header-6: linear-gradient(#540d83 75%, #8654a4);
+
+  /* --breakPoint500: 500px; */
+  --bg: linear-gradient(0deg, var(--header-5) 70%, var(--header-4));
+  --headerHeight:100px;
+}
+
+.nav_link {
+  background-color: rgb(215, 182, 244);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -26,8 +42,71 @@ body {
     rgb(var(--background-start-rgb));
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+.appCont {
+  /* max-width: 1024px; */
+  min-height: 100vh;
+  width: 100%;
+  height: 100%;
+  border: 2px gray solid;
+
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+.main {
+  flex: 1 1 auto;
+  padding-top: 7rem;
+  background: white;
+}
+
+.section {
+  background-color: rgb(255, 255, 255);
+}
+
+.article{
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 5px 5px 10px #1e2828b8;
+  margin: 1rem 0.5rem;
+}
+
+h1 {
+  font-size: 2rem;
+  text-align: center;
+}
+h2 {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+input,
+textarea {
+  background-color: #ffffff;
+  color: #000000;
+}
+.btn {
+  border-radius: 6px;
+  /* background-color: rgb(107, 107, 217); */
+  background: var(--bg);
+  padding: 0.25rem;
+  margin-right: 1rem;
+  margin-left: auto;
+  color: var(--green-100);
+}
+
+@media (max-width: 500px) {
+  :root {
+    --headerHeight:75px;
+  }
+  .main {
+    padding-top: 5rem;
   }
 }

@@ -100,7 +100,7 @@ export async function fetchNewsB() {
     }
 }
 
-const ITEMS_PER_PAGE = 3;
+const ITEMS_PER_PAGE = 5;
 
 export async function fetchNewsC(currentPage: number) {
     // const currentPage=1;
