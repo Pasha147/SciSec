@@ -6,19 +6,6 @@ import Pagination from './pagination';
 
 export default async function NewsArticles({ currentPage }: { currentPage: number }) {
 
-    // const news = await (await fetchNewsB()).reverse()
-    // const news = (await fetchNewsC()).sort(
-    //     (a, b) => {
-    //         const dateA = a.date;
-    //         const dateB = b.date;
-    //         if (dateA < dateB) {
-    //             return -1;
-    //         }else
-    //        {
-    //             return 1;
-    //         }
-    //     }
-    // ).reverse()
     const { totalNews, totalPage } = { ...(await newsCount()) }
 
     console.log('Total Pages->', totalPage);

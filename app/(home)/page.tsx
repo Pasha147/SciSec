@@ -27,10 +27,10 @@ export default async function Home({
       <Link
         key={'admin'}
         href={'/admin'}
-        className={`${styles.navLink} }`}
+        className={`${styles.navLink} btn }`}
         
       >
-        Admin
+        Вхід для вченого секретаря
       </Link>
       <Suspense fallback={<SkelNewsArticles />}>
         <NewsArticles currentPage={currentPage} />

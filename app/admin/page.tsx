@@ -65,19 +65,13 @@ export default async function Admin() {
                   redirect(`/admin/${nw.id}/editNews`);
                 }}
               >
-                <button className="btn" type="submit">
+                {/* <button className="btn" type="submit">
                   Edit
-                </button>
+                </button> */}
               </form>
             </div>
             <EditCurNews curNews={nw} />
-            {/* <EditForm curNews={nw}/> */}
-            {/* <Link
-                href={`/admin/${nw.id}/editNews`}
-                className="rounded-md border p-2 hover:bg-gray-100"
-              >
-               Edit
-              </Link> */}
+            
           </div>
         );
       })}
