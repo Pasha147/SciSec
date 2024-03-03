@@ -1,10 +1,11 @@
 import Image from "next/image";
 import styles from "@/app/admin/admin.module.css";
-import { fetchNewsB, deleteNews} from "../lib/action";
+import { fetchNewsB, deleteNews } from "../lib/action";
 import Link from "next/link";
 import { signOut } from "@/auth";
 import { redirect } from "next/navigation";
 import EditCurNews from "@/app/ui/editCurNews";
+import CreateNews from "@/app/ui/createNews";
 
 import { Metadata } from "next";
 export const metadata: Metadata = {
@@ -39,6 +40,8 @@ export default async function Admin() {
 
       <h1 className={styles.h1}>Admin page</h1>
 
+      <CreateNews news={news} />
+
       <h2>News</h2>
       {news.map((nw, n) => {
         const deleteNewsId = deleteNews.bind(null, nw.id);
@@ -71,7 +74,6 @@ export default async function Admin() {
               </form>
             </div>
             <EditCurNews curNews={nw} />
-            
           </div>
         );
       })}
