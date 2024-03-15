@@ -20,29 +20,10 @@ export default async function NewsArticles({ currentPage }: { currentPage: numbe
                             key={`news ${nw.id}`}
                             className={cl.newsArticle}
                         >
-                            {/* <p>{`id: ${nw.id}`}</p> */}
                             <p>{`date: ${nw.date}`}</p>
                             <hr />
                             <h2>{nw.title}</h2>
-                            <div className={cl.imgCont}>
-                                <Image
-                                    className={cl.imgNext}
-                                    src={`/img/${nw.img}`}
-                                    width={300}
-                                    height={1}
-                                    // priority={true}
-                                    // className={}
-                                    // style={{
-                                    //     height: '100px',
-                                    //     objectFit: 'contain', // cover, contain, none
-                                    // }}
-                                    // className="hidden md:block"
-                                    alt="Logo"
-                                />
-                            </div>
-                            {/* <p>{`img: ${nw.img}`}</p> */}
                             <p>{nw.text}</p>
-
                         </div>
                     )
                 })

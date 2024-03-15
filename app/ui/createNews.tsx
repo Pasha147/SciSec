@@ -1,11 +1,11 @@
 "use client"
 
 import { useState } from "react"
-import { INewsMassage } from "../lib/definitions"
+import { NewsMassageC } from "../lib/definitions"
 import { CreateNewsForm } from "./crNewsForm";
   
 
-export default function CreateNews( {news}:{news:INewsMassage[]}) {
+export default function CreateNews( {news}:{news:NewsMassageC[]}) {
     const [isForm, setIsForm]=useState(false)
     
     return (

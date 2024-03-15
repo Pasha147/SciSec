@@ -70,7 +70,18 @@ CREATE TABLE newsB (
     text text NOT NULL
        );
 
- INSERT INTO news (date, title, text)
+INSERT INTO news (date, title, text)
+        VALUES ('ddd', 'fff', 'fff')
+        ON CONFLICT (id) DO NOTHING;
+
+ CREATE TABLE newsc (
+    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    date varchar(255) NOT NULL,
+    title varchar(255) NOT NULL,
+    text text NOT NULL
+       );
+
+ INSERT INTO newsc (date, title, text)
         VALUES ('ddd', 'fff', 'fff')
         ON CONFLICT (id) DO NOTHING;
 
@@ -88,6 +99,8 @@ type NewsSchemaB = {
     text: string
 }
 
+
+
 export async function fetchNewsB() {
     noStore();
     try {
@@ -101,6 +114,24 @@ export async function fetchNewsB() {
 }
 
 const ITEMS_PER_PAGE = 5;
+type NewsSchemaC = {
+    id: string
+    date: string
+    title: string
+    text: string
+}
+
+export async function fetchNewsCall() {
+    noStore();
+    try {
+        const data = await sql<NewsSchemaC>`SELECT * FROM newsc`;
+        return data.rows;
+
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to fetch revenue data.');
+    }
+}
 
 export async function fetchNewsC(currentPage: number) {
     // const currentPage=1;
@@ -108,9 +139,9 @@ export async function fetchNewsC(currentPage: number) {
     const offset = (currentPage - 1) * ITEMS_PER_PAGE;
     noStore();
     try {
-        const data = await sql<NewsSchemaB>`
-        SELECT * FROM newsb
-        ORDER BY newsb.date DESC
+        const data = await sql<NewsSchemaC>`
+        SELECT * FROM newsc
+        ORDER BY newsc.date DESC
         LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
         `;
         return data.rows;

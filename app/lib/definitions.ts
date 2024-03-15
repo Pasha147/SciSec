@@ -6,11 +6,10 @@ export type NewsMassage = {
     text: string;
   };
 
-  export interface INewsMassage {
+  export interface NewsMassageC {
     id: string; // Will be created on the database
     date: string;
     title: string; // Stored in cents
-    img: string;
     text: string;
   }
 

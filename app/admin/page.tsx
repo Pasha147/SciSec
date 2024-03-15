@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "@/app/admin/admin.module.css";
-import { fetchNewsB, deleteNews } from "../lib/action";
+import { fetchNewsCall, deleteNews } from "../lib/action";
 import Link from "next/link";
 import { signOut } from "@/auth";
 import { redirect } from "next/navigation";
@@ -14,17 +14,19 @@ export const metadata: Metadata = {
 
 export default async function Admin() {
   // const news = await (await fetchNewsB()).reverse()
-  const news = (await fetchNewsB())
-    .sort((a, b) => {
-      const dateA = a.date;
-      const dateB = b.date;
-      if (dateA < dateB) {
-        return -1;
-      } else {
-        return 1;
-      }
-    })
-    .reverse();
+  // const news = (await fetchNewsB())
+  //   .sort((a, b) => {
+  //     const dateA = a.date;
+  //     const dateB = b.date;
+  //     if (dateA < dateB) {
+  //       return -1;
+  //     } else {
+  //       return 1;
+  //     }
+  //   })
+  //   .reverse();
+
+    const news = await fetchNewsCall();
 
   return (
     <div className={"container " + styles.sectionAdmin}>
@@ -52,7 +54,6 @@ export default async function Admin() {
             <p>{`id: ${nw.id}`}</p>
             <p>{`date: ${nw.date}`}</p>
             <p>{`title: ${nw.title}`}</p>
-            <p>{`img: ${nw.img}`}</p>
             <p>{`text: ${nw.text}`}</p>
             <div className={styles.btnCont}>
               <form className={styles.artBtn} action={deleteNewsId}>
