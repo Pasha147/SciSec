@@ -12,6 +12,12 @@ export type NewsMassage = {
     title: string; // Stored in cents
     text: string;
   }
+  export interface INewsMassage {
+    id: string; // Will be created on the database
+    date: string;
+    title: string; // Stored in cents
+    text: string;
+  }
 
   //For auth.ts
   export type User = {
