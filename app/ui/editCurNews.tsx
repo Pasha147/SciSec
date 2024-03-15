@@ -49,17 +49,7 @@ export default function EditCurNews({ curNews }: { curNews: INewsMassage }) {
                 className={classes.titleInp}
                 defaultValue={curNews.title}
               />
-              <label htmlFor="img" className={classes.label}>
-                img
-              </label>
-              <input
-                id="img"
-                name="img"
-                type="text"
-                placeholder="img"
-                className={classes.titleInp}
-                defaultValue={curNews.img}
-              />
+             
               <label htmlFor="text" className={classes.label}>
                 Text
               </label>
