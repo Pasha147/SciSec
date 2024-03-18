@@ -61,18 +61,7 @@ export default async function Admin() {
                   Del
                 </button>
               </form>
-              <form
-                className={styles.artBtn}
-                // action={editNewsIdB}>
-                action={async () => {
-                  "use server";
-                  redirect(`/admin/${nw.id}/editNews`);
-                }}
-              >
-                {/* <button className="btn" type="submit">
-                  Edit
-                </button> */}
-              </form>
+              
             </div>
             <EditCurNews curNews={nw} />
           </div>

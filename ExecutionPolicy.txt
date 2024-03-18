@@ -1,1 +1,5 @@
+First, press Windows+R to open Run, and then type "powershell" 
+in the text box. Next, press Ctrl+Shift+Enter. Windows PowerShell
+ will open in admin mode.
+
 Set-ExecutionPolicy -Scope LocalMachine -ExecutionPolicy Bypass

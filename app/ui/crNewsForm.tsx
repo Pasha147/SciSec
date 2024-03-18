@@ -1,7 +1,7 @@
 "use client";
 
 import classes from "@/app/ui/crNewsForm.module.css";
-import { createNewsB } from "../lib/action";
+import { createNewsC } from "../lib/action";
 import { useState, FormEvent } from "react";
 
 export function CreateNewsForm({ setIsForm }: { setIsForm: Function }) {
@@ -9,23 +9,24 @@ export function CreateNewsForm({ setIsForm }: { setIsForm: Function }) {
   const date = new Date().toISOString().split("T")[0];
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setIsLoading(true); // Set loading to true when the request starts
     const formData = new FormData(event.currentTarget); //get formData from event
-    await createNewsB(formData); //upload formData
+    await createNewsC(formData); //upload formData
     setIsLoading(false); // Set loading to false when the request completes
   }
 
   return (
     <>
       <form onSubmit={onSubmit} className={classes.createForm}>
-      <button 
-      className={`btn ${classes.closeBtn}`}
-      onClick={()=>setIsForm(false)}
-      >X</button>
+        <button
+          className={`btn ${classes.closeBtn}`}
+          onClick={() => setIsForm(false)}
+        >
+          X
+        </button>
         <h2 className={classes.h2}>Create news</h2>
         <label htmlFor="date" className={classes.label}>
           Date
@@ -48,16 +49,6 @@ export function CreateNewsForm({ setIsForm }: { setIsForm: Function }) {
           placeholder="Title"
           className={classes.titleInp}
           required
-        />
-        <label htmlFor="img" className={classes.label}>
-          img
-        </label>
-        <input
-          id="img"
-          name="img"
-          type="text"
-          placeholder="img"
-          className={classes.titleInp}
         />
         <label htmlFor="text" className={classes.label}>
           Text

@@ -11,32 +11,75 @@ import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
 
 
-const FormSchemaB = z.object({
+
+
+// const FormSchemaB = z.object({
+//     id: z.string(),
+//     date: z.string(),
+//     title: z.string(),
+//     img: z.string(),
+//     text: z.string(),
+// });
+
+// const CreateNewsB = FormSchemaB.omit({ id: true });
+
+// export async function createNewsB(formData: FormData) {
+//     noStore();
+//     const rawFormData = {
+//         date: formData.get('date'),
+//         title: formData.get('title'),
+//         img: formData.get('img'),
+//         text: formData.get('text')
+//     }
+
+//     const { date, title, img, text } = CreateNewsB.parse(rawFormData);
+//     // console.log(date, title, text);
+
+//     try {
+//         await sql`
+//         INSERT INTO newsb (date, title, img, text)
+//         VALUES (${date}, ${title}, ${img}, ${text})
+//         ON CONFLICT (id) DO NOTHING;
+//             `;
+
+
+//     } catch (error) {
+//         return {
+//             message: 'Database Error: Failed to Create News.',
+//         };
+//     }
+
+//     revalidatePath('/admin');
+//     // redirect('/admin')
+
+// }
+
+//---CreateNewsC----------------------------------------------------
+
+const FormSchemaC = z.object({
     id: z.string(),
     date: z.string(),
     title: z.string(),
-    img: z.string(),
     text: z.string(),
 });
 
-const CreateNewsB = FormSchemaB.omit({ id: true });
+const CreateNewsc = FormSchemaC.omit({ id: true });
 
-export async function createNewsB(formData: FormData) {
+export async function createNewsC(formData: FormData) {
     noStore();
     const rawFormData = {
         date: formData.get('date'),
         title: formData.get('title'),
-        img: formData.get('img'),
         text: formData.get('text')
     }
 
-    const { date, title, img, text } = CreateNewsB.parse(rawFormData);
+    const { date, title, text } = CreateNewsC.parse(rawFormData);
     // console.log(date, title, text);
 
     try {
         await sql`
-        INSERT INTO newsb (date, title, img, text)
-        VALUES (${date}, ${title}, ${img}, ${text})
+        INSERT INTO newsc (date, title, text)
+        VALUES (${date}, ${title}, ${text})
         ON CONFLICT (id) DO NOTHING;
             `;
 
@@ -51,6 +94,8 @@ export async function createNewsB(formData: FormData) {
     // redirect('/admin')
 
 }
+//------------===============--------------
+
 
 
 
@@ -213,19 +258,20 @@ export async function fetchNewsById(id: string) {
 // const UpdateInvoice = FormSchema.omit({ id: true, date: true });
 
 
+const CreateNewsC = FormSchemaC.omit({ id: true });
+
 export async function editNews(id: string, form: FormData) {
     const rawForm = {
         date: form.get('date'),
         title: form.get('title'),
-        img: form.get('img'),
         text: form.get('text'),
     }
-    const { date, title, img, text } = CreateNewsB.parse(rawForm);
+    const { date, title, text } = CreateNewsC.parse(rawForm);
 
 
     await sql`
-    UPDATE newsb
-    SET id = ${id}, date = ${date}, title = ${title}, img = ${img}, text = ${text}
+    UPDATE newsc
+    SET id = ${id}, date = ${date}, title = ${title}, text = ${text}
     WHERE id = ${id}
   `;
 
