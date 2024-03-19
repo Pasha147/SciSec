@@ -10,7 +10,7 @@ import { redirect } from 'next/navigation';
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
 
-
+const ITEMS_PER_PAGE = 5;
 
 
 // const FormSchemaB = z.object({
@@ -158,7 +158,7 @@ export async function fetchNewsB() {
     }
 }
 
-const ITEMS_PER_PAGE = 5;
+
 type NewsSchemaC = {
     id: string
     date: string
@@ -202,7 +202,7 @@ export async function newsCount() {
     try {
         const nCount = await sql`
         SELECT COUNT(*)
-        FROM newsb
+        FROM newsc
         `
         console.log('nCount-->',nCount.rows[0].count);
         
@@ -220,7 +220,7 @@ export async function deleteNews(id: string) {
     // throw new Error('Failed to Delete Invoice');
     console.log('id->', id);
 
-    await sql`DELETE FROM newsb WHERE id = ${id}`;
+    await sql`DELETE FROM newsc WHERE id = ${id}`;
 
     revalidatePath('/admin');
     revalidatePath('/');
