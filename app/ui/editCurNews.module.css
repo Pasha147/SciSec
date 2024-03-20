@@ -27,6 +27,7 @@
   padding: 0.25rem;
   margin-right: 1rem;
   margin-left: auto;
+  width: 10rem;
 }
 .closeBtn {
   position: absolute;
@@ -34,4 +35,8 @@
   height: 2rem;
   right: 0rem;
   top: 0.25rem;
+}
+
+.btnDisabled{
+  background-color: bisque;
 }

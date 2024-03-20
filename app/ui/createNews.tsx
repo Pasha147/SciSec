@@ -4,21 +4,33 @@ import { useState, FormEvent } from "react";
 import { NewsMassageC } from "../lib/definitions";
 import { createNewsC } from "../lib/action";
 import cl from "@/app/ui/createNews.module.css";
+import { useFormStatus } from "react-dom";
+import { log } from "console";
 
 export default function CreateNews({ news }: { news: NewsMassageC[] }) {
   const [isForm, setIsForm] = useState(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  async function onSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setIsLoading(true); // Set loading to true when the request starts
-    const formData = new FormData(event.currentTarget); //get formData from event
-    await createNewsC(formData); //upload formData
-    setIsLoading(false); // Set loading to false when the request completes
-    setIsForm(false)
-  }
+  //   async function onSubmit(event: FormEvent<HTMLFormElement>) {
+  //     event.preventDefault();
+  //     setIsLoading(true); // Set loading to true when the request starts
+  //     const formData = new FormData(event.currentTarget); //get formData from event
+  //     await createNewsC(formData); //upload formData
+  //     setIsLoading(false); // Set loading to false when the request completes
+  //     setIsForm(false)
+  //   }
 
   const date = new Date().toISOString().split("T")[0];
+
+  async function save(formData: any) {
+    const button = formData.get("button");
+    // console.log('button-->', button);
+    if (button == "submit") {
+      createNewsC(formData);
+    } else {
+      setIsForm(false);
+    }
+  }
 
   return (
     <>
@@ -28,10 +40,15 @@ export default function CreateNews({ news }: { news: NewsMassageC[] }) {
       {
         //  isForm && <CreateNewsForm setIsForm={setIsForm}/>
         isForm && (
-          <form onSubmit={onSubmit} className={cl.createForm}>
+          //   <form onSubmit={onSubmit} className={cl.createForm}>
+          //   <form action={createNewsC} className={cl.createForm}>
+          <form action={save} className={cl.createForm}>
             <button
               className={`btn ${cl.closeBtn}`}
-              onClick={() => setIsForm(false)}
+              //   onClick={() => setIsForm(false)}
+              type="submit"
+              name="button"
+              value="cancel"
             >
               X
             </button>
@@ -68,12 +85,29 @@ export default function CreateNews({ news }: { news: NewsMassageC[] }) {
               placeholder="Text"
               required
             ></textarea>
-            <button type="submit" className="btn" disabled={isLoading}>
+            <Submit />
+           
+            {/* <button type="submit" className="btn" disabled={isLoading}>
               {isLoading ? "Loading..." : "Save"}
-            </button>
+            </button> */}
           </form>
         )
       }
     </>
+  );
+}
+
+function Submit() {
+  const { pending } = useFormStatus();
+  return (
+    <button
+    //   className={`btn ${cl.submitBtn} ${pending ? cl.btnDisabled : ""}`}
+      className={`btn ${cl.submitBtn} ${pending ? cl.btnDisabled : ""}`}
+      type="submit"
+      name="button"
+      value="submit"
+    >
+      {pending ? "Submitting..." : "Submit"}
+    </button>
   );
 }

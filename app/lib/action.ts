@@ -136,27 +136,27 @@ DROP TABLE news;
 
 
 
-type NewsSchemaB = {
-    id: string
-    date: string
-    title: string
-    img: string
-    text: string
-}
+// type NewsSchemaB = {
+//     id: string
+//     date: string
+//     title: string
+//     img: string
+//     text: string
+// }
 
 
 
-export async function fetchNewsB() {
-    noStore();
-    try {
-        const data = await sql<NewsSchemaB>`SELECT * FROM newsb`;
-        return data.rows;
+// export async function fetchNewsB() {
+//     noStore();
+//     try {
+//         const data = await sql<NewsSchemaB>`SELECT * FROM newsb`;
+//         return data.rows;
 
-    } catch (error) {
-        console.error('Database Error:', error);
-        throw new Error('Failed to fetch revenue data.');
-    }
-}
+//     } catch (error) {
+//         console.error('Database Error:', error);
+//         throw new Error('Failed to fetch revenue data.');
+//     }
+// }
 
 
 type NewsSchemaC = {
@@ -169,7 +169,10 @@ type NewsSchemaC = {
 export async function fetchNewsCall() {
     noStore();
     try {
-        const data = await sql<NewsSchemaC>`SELECT * FROM newsc`;
+        const data = await sql<NewsSchemaC>`
+        SELECT * FROM newsc
+        ORDER BY newsc.date DESC
+        `;
         return data.rows;
 
     } catch (error) {
@@ -232,27 +235,27 @@ export async function deleteNews(id: string) {
 
 
 
-export async function fetchNewsById(id: string) {
-    noStore();
-    try {
-        const data = await sql<NewsSchemaB>`
-          SELECT
-          newsb.id,
-          newsb.date,
-          newsb.title,
-          newsb.img,
-          newsb.text
-          FROM newsb
-          WHERE newsb.id = ${id};         
-        `;
+// export async function fetchNewsById(id: string) {
+//     noStore();
+//     try {
+//         const data = await sql<NewsSchemaB>`
+//           SELECT
+//           newsb.id,
+//           newsb.date,
+//           newsb.title,
+//           newsb.img,
+//           newsb.text
+//           FROM newsb
+//           WHERE newsb.id = ${id};         
+//         `;
 
-        // console.log(data); // Invoice is an empty array []
-        return data.rows[0];
-    } catch (error) {
-        console.error('Database Error--->:', error);
-        // throw new Error('Failed to fetch news by id.');
-    }
-}
+//         // console.log(data); // Invoice is an empty array []
+//         return data.rows[0];
+//     } catch (error) {
+//         console.error('Database Error--->:', error);
+//         // throw new Error('Failed to fetch news by id.');
+//     }
+// }
 
 // Use Zod to update the expected types
 // const UpdateInvoice = FormSchema.omit({ id: true, date: true });

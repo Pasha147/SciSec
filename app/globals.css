@@ -100,6 +100,11 @@ textarea {
   margin-right: 1rem;
   margin-left: auto;
   color: var(--green-100);
+  box-sizing: border-box;
+}
+.btn:disabled{
+  
+  border: 2px solid red;
 }
 
 @media (max-width: 500px) {

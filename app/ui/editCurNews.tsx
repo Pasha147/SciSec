@@ -5,10 +5,12 @@ import { INewsMassage } from "../lib/definitions";
 // import EditForm from "./editForm";
 import classes from "./editCurNews.module.css";
 import { editNews } from "@/app/lib/action";
+import { useFormStatus } from 'react-dom'
 
 export default function EditCurNews({ curNews }: { curNews: INewsMassage }) {
   const [isForm, setIsForm] = useState(false);
   const updateNewsWithId = editNews.bind(null, curNews.id);
+  // const { pending } = useFormStatus();
 
   return (
     <>
@@ -60,13 +62,25 @@ export default function EditCurNews({ curNews }: { curNews: INewsMassage }) {
                 placeholder="Text"
                 defaultValue={curNews.text}
               ></textarea>
-              <button type="submit" className={classes.submitBtn}>
+              {/* <button 
+                type="submit" 
+                className={`${pending ? classes.submitBtn : classes.btnDisabled}`}
+                aria-disabled={pending}
+                >
                 Seve news
-              </button>
+              </button> */}
+              <Submit/>
             </form>
           </div>
         )
       }
     </>
   );
+}
+
+function Submit() {
+  const {pending} = useFormStatus();
+  return <button className={`${classes.submitBtn} ${pending ? classes.btnDisabled : ''}`}>
+    {pending ? "Submitting..." : "Submit"}
+    </button>
 }
