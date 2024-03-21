@@ -12,48 +12,6 @@ import { AuthError } from 'next-auth';
 
 const ITEMS_PER_PAGE = 5;
 
-
-// const FormSchemaB = z.object({
-//     id: z.string(),
-//     date: z.string(),
-//     title: z.string(),
-//     img: z.string(),
-//     text: z.string(),
-// });
-
-// const CreateNewsB = FormSchemaB.omit({ id: true });
-
-// export async function createNewsB(formData: FormData) {
-//     noStore();
-//     const rawFormData = {
-//         date: formData.get('date'),
-//         title: formData.get('title'),
-//         img: formData.get('img'),
-//         text: formData.get('text')
-//     }
-
-//     const { date, title, img, text } = CreateNewsB.parse(rawFormData);
-//     // console.log(date, title, text);
-
-//     try {
-//         await sql`
-//         INSERT INTO newsb (date, title, img, text)
-//         VALUES (${date}, ${title}, ${img}, ${text})
-//         ON CONFLICT (id) DO NOTHING;
-//             `;
-
-
-//     } catch (error) {
-//         return {
-//             message: 'Database Error: Failed to Create News.',
-//         };
-//     }
-
-//     revalidatePath('/admin');
-//     // redirect('/admin')
-
-// }
-
 //---CreateNewsC----------------------------------------------------
 
 const FormSchemaC = z.object({
@@ -136,29 +94,6 @@ DROP TABLE news;
 
 
 
-// type NewsSchemaB = {
-//     id: string
-//     date: string
-//     title: string
-//     img: string
-//     text: string
-// }
-
-
-
-// export async function fetchNewsB() {
-//     noStore();
-//     try {
-//         const data = await sql<NewsSchemaB>`SELECT * FROM newsb`;
-//         return data.rows;
-
-//     } catch (error) {
-//         console.error('Database Error:', error);
-//         throw new Error('Failed to fetch revenue data.');
-//     }
-// }
-
-
 type NewsSchemaC = {
     id: string
     date: string
@@ -229,37 +164,6 @@ export async function deleteNews(id: string) {
     revalidatePath('/');
 }
 
-// export async function editNewsId(id: string) {
-//     redirect(`/admin/${id}/editNews`)
-// }
-
-
-
-// export async function fetchNewsById(id: string) {
-//     noStore();
-//     try {
-//         const data = await sql<NewsSchemaB>`
-//           SELECT
-//           newsb.id,
-//           newsb.date,
-//           newsb.title,
-//           newsb.img,
-//           newsb.text
-//           FROM newsb
-//           WHERE newsb.id = ${id};         
-//         `;
-
-//         // console.log(data); // Invoice is an empty array []
-//         return data.rows[0];
-//     } catch (error) {
-//         console.error('Database Error--->:', error);
-//         // throw new Error('Failed to fetch news by id.');
-//     }
-// }
-
-// Use Zod to update the expected types
-// const UpdateInvoice = FormSchema.omit({ id: true, date: true });
-
 
 const CreateNewsC = FormSchemaC.omit({ id: true });
 
@@ -305,32 +209,3 @@ export async function authenticate(
 
 
 //===================================================
-
-/*
-const FormSchema = z.object({
-    id: z.string(),
-    date: z.string(),
-    title: z.string(),
-    text: z.string(),
-});
-
-const CreateNews = FormSchema.omit({ id: true });
-
-export async function createNews(formData: FormData) {
-    const rawFormData = {
-        date: formData.get('date'),
-        title: formData.get('title'),
-        text: formData.get('text')
-    }
-
-    const { date, title, text } = CreateNews.parse(rawFormData);
-    // console.log(date, title, text);
-
-    await sql`
-        INSERT INTO news (date, title, text)
-        VALUES (${date}, ${title}, ${text})
-        ON CONFLICT (id) DO NOTHING;
-        `;
-
-}
-*/
